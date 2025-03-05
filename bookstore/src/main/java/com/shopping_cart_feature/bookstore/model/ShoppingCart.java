@@ -1,4 +1,4 @@
-package com.geektest.bookstore.model;
+package com.shopping_cart_feature.bookstore.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
