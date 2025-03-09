@@ -58,7 +58,7 @@ CREATE TABLE `ratings` (
   `ratingValue` float NOT NULL,
   `ratingDate` datetime NOT NULL,
   PRIMARY KEY (`ratingId`),
-  CONSTRAINT `fk_bookId_rating`
+  CONSTRAINT `fk_book_id_rating`
     FOREIGN KEY (`bookId`) REFERENCES `books`(`bookId`)
     ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -66,14 +66,14 @@ CREATE TABLE `ratings` (
 
 
 
---
--- Dumping data for table `books`
---
+-- --
+-- -- Dumping data for table `books`
+-- --
 
-LOCK TABLES `books` WRITE;
-/*!40000 ALTER TABLE `books` DISABLE KEYS */;
-/*!40000 ALTER TABLE `books` ENABLE KEYS */;
-UNLOCK TABLES;
+-- LOCK TABLES `books` WRITE;
+-- /*!40000 ALTER TABLE `books` DISABLE KEYS */;
+-- /*!40000 ALTER TABLE `books` ENABLE KEYS */;
+-- UNLOCK TABLES;
 
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
