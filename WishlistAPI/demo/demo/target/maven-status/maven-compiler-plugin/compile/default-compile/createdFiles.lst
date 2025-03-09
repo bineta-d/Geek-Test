@@ -1,0 +1,7 @@
+com\demoproject\demo\Controller\wishlist_controller.class
+com\demoproject\demo\wishlist.class
+com\demoproject\demo\Repo\wishlist_repository.class
+com\demoproject\demo\Controller\wishlist_items_controller.class
+com\demoproject\demo\wishlist_items.class
+com\demoproject\demo\DemoApplication.class
+com\demoproject\demo\Repo\wishlist_items_repository.class
