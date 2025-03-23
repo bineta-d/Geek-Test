@@ -30,28 +30,32 @@ public class ApiController {
         return "User Saved";
     }
 
-    @PutMapping(value = "update/{id}")
-    public String updateUser(@PathVariable long id, @RequestBody User user) {
-        User updatedUser = userRepo.findById(id).get();
-        updatedUser.setFirstName(user.getFirstName());
-        updatedUser.setLastName(user.getLastName());
-        updatedUser.setEmail(user.getEmail());
-        updatedUser.setPassword(user.getPassword());
-        updatedUser.setStreet1(user.getStreet1());
-        updatedUser.setStreet2(user.getStreet2());
-        updatedUser.setCity(user.getCity());
-        updatedUser.setState(user.getState());
-        updatedUser.setZip(user.getZip());
-        updatedUser.setCreditCard(user.getCreditCard());
-        userRepo.save(updatedUser);
-        return "User Updated";
-    }
-
     //method to return user data based on username
     @GetMapping(value = "/users/{username}")
     public Optional<User> getUserByUsername(@PathVariable String username) {
         return userRepo.findByUsername(username);
 
+    }
+
+    //method to update user field given username (except mail)
+    @PutMapping(value = "update/{username}")
+    public String updateUser(@PathVariable String username, @RequestBody User user) {
+        Optional<User> existingUser = userRepo.findByUsername(username);
+
+        if (existingUser.isPresent()) {
+            User updatedUser = existingUser.get();
+
+            //updating only fields that have a value and are not mailing fields
+            if (user.getFirstName() != null) updatedUser.setFirstName(user.getFirstName());
+            if (user.getLastName() != null) updatedUser.setLastName(user.getLastName());
+            if (user.getPassword() != null) updatedUser.setPassword(user.getPassword());
+            if (user.getCreditCard() != null) updatedUser.setCreditCard(user.getCreditCard());
+
+            userRepo.save(updatedUser);
+            return "User Updated";
+        }
+
+        return "User Not Found";
     }
 
 }
