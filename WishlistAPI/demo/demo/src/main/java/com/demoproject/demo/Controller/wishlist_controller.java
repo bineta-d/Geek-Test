@@ -23,4 +23,15 @@ public class wishlist_controller {
     public List<wishlist> getwishlist(@PathVariable int wishlistID){
         return wishlistRepository.findByWishlistID(wishlistID);
     }
+
+    @DeleteMapping(path="/delete/{wishlistID}")
+    public void delete_wishlist(@PathVariable int wishlistID){
+        wishlistRepository.delete_wishlist(wishlistID);
+    }
+
+
+    @PostMapping(path="/add/{userID}/{wishlistID}/{wishlistName}")
+    public void add_wishlist(@PathVariable long userID, @PathVariable int wishlistID, @PathVariable String wishlistName){
+        wishlistRepository.insert_wishlist(userID, wishlistID, wishlistName);
+    }
 }
