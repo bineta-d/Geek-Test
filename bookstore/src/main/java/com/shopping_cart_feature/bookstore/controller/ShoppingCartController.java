@@ -2,6 +2,7 @@ package com.shopping_cart_feature.bookstore.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,8 @@ import com.shopping_cart_feature.bookstore.model.Book;
 import com.shopping_cart_feature.bookstore.model.ShoppingCart;
 import com.shopping_cart_feature.bookstore.repository.BookRepository;
 import com.shopping_cart_feature.bookstore.repository.ShoppingCartRepository;
+
+import jakarta.transaction.Transactional;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -69,13 +72,14 @@ public class ShoppingCartController {
         return subtotal;
     }
 
-    // @PostMapping(path="/addToCart")
-    // public void addToCard(@RequestBody ShoppingCart cartItem) {
-    //     shoppingCartRepository.save(cartItem);
-    // }
-
     @PostMapping(path="/addToCart/user={userId}&book={bookId}")
     public void addToCard(@PathVariable long userId, @PathVariable long bookId) {
         shoppingCartRepository.save(new ShoppingCart(userId, bookId));
+    }
+
+    @Transactional
+    @DeleteMapping(path="/deleteFromCart/user={userId}&book={bookId}")
+    public void deleteFromCart(@PathVariable long userId, @PathVariable long bookId) {
+            shoppingCartRepository.deleteCartItem(userId, bookId);
     }
 }
