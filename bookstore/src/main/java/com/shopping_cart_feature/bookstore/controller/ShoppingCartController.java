@@ -80,9 +80,6 @@ public class ShoppingCartController {
     @Transactional
     @DeleteMapping(path="/deleteFromCart/user={userId}&book={bookId}")
     public void deleteFromCart(@PathVariable long userId, @PathVariable long bookId) {
-            //System.out.println("----- entered");
-            //shoppingCartRepository.delete(new ShoppingCart(userId, bookId));
             shoppingCartRepository.deleteCartItem(userId, bookId);
-           // if(item == null) throw new CartItemNotFoundException();
     }
 }
