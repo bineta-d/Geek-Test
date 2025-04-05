@@ -1,6 +1,5 @@
 package com.example.bookstore.Models;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -40,9 +39,6 @@ public class User {
     @Column
     private String username;
 
-    @Column
-    private String creditCard;
-
     public long getId() {
         return id;
     }
@@ -58,6 +54,7 @@ public class User {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
@@ -130,13 +127,16 @@ public class User {
         this.username = username;
     }
 
-    public String getCreditCard() {
+    @OneToOne(cascade = CascadeType.ALL)  //Auto-save credit card when saving User
+    @JoinColumn(name = "credit_card_id")
+    private CreditCard creditCard;
+
+    // Getters and Setters
+    public CreditCard getCreditCard() {
         return creditCard;
     }
 
-    public void setCreditCard(String creditCard) {
+    public void setCreditCard(CreditCard creditCard) {
         this.creditCard = creditCard;
     }
-
-
 }
